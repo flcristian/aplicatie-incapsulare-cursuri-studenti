@@ -26,7 +26,7 @@
     <ClInclude Include="controller-student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="view.h">
+    <ClInclude Include="cristi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="course.h">
@@ -39,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="controller-enrolment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

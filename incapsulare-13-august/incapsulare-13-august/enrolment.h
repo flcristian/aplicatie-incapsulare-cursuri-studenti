@@ -2,9 +2,9 @@
 
 struct Enrolment {
 private:
-	int id;
-	int course_id;
-	int student_id;
+	int id=-1;
+	int course_id=-1;
+	int student_id=-1;
 
 public:
 

@@ -42,6 +42,17 @@ public :
 	}
 
 	int getDim() {
-		return this->dim;
+		return this->dim + 1;
 	}
+
+	int idUnic() {
+		if (dim == 0) {
+
+			return 1;
+		}
+		else {
+			return dim;
+		}
+	}
+
 };

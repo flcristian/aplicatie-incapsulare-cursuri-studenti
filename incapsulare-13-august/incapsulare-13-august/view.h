@@ -1,172 +1,111 @@
 #include "controller-enrolment.h"
 
-struct View {
-private :
+struct View
+{
+private:
 	ControlEnrolment controlenrolment;
 	ControlCourse controlcourse;
 	ControlStudent controlstudent;
 	Student student;
 
-	int login(bool& logged, Student& student) {
-		string email, password;
-		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-		cout << "Introduceti email-ul : ";
-		cin >> email;
-		cout << "Introduceti parola : ";
-		cin >> password;
-		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-		for (int i = 0; i < controlstudent.getDim(); i++) {
-			Student x = controlstudent.getStudent(i);
-			if (x.getEmail() == email && x.getPassword() == password) {
-				logged = true;
-				student = x;
-				cout << "Ati fost logat!" << endl;
-				cout << "Salutare, " << x.getFirstName() << " " << x.getLastName() << "!" << endl;
-				return 0;
-			}
-		}
-		if (!logged) {
-			cout << "Email-ul sau parola sunt gresite!" << endl;
-			return 0;
-		}
-	}
-
-	void logout(bool& logged) {
-		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-		cout << "Ati fost delogat!" << endl;
-		logged = false;
-	}
-
-	void afisareCoursesEnroled() {
-		int c = 0;
-		for (int i = 0; i < controlenrolment.getDim(); i++) {
-			Enrolment enrolment = controlenrolment.getEnrolment(i);
-			if (enrolment.getStudentID() == this->student.getID()) {
-				int enroled = enrolment.getCourseID();
-				Course course = controlcourse.getCourse(enroled - 1);
-				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-				course.descriereCourse();
-				c++;
-			}
-		}
-		if (c == 0) {
-			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-			cout << "Nu sunteti inscris/a la niciun curs!" << endl;
-		}
-	}
-
-	bool inscrisLaCurs(int course_id, int student_id) {
-		for (int i = 0; i < controlenrolment.getDim(); i++) {
-			Enrolment x = controlenrolment.getEnrolment(i);
-			if (x.getCourseID() == course_id && x.getStudentID() == student_id) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	void adaugareCourseStudent(int& course_id) {
-		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-		cout << "Introduceti ID-ul cursului la care doriti sa va inscrieti :" << endl;
-		cin >> course_id;
-		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-		if (inscrisLaCurs(course_id, student.getID())) {
-			cout << "Sunteti deja inscris la acest curs!" << endl;
-		}
-		else {
-			controlenrolment.addEnrolment(student.getID(), course_id);
-			cout << "Ati fost inscris la acest curs!" << endl;
-		}
-		
-	}
-
-	int stergereCourseStudent(int& course_id) {
-		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-		cout << "Introduceti ID-ul cursului la care doriti sa renuntati :" << endl;
-		cin >> course_id;
-		int c = 0;
-		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-		for (int i = 0; i < controlenrolment.getDim(); i++) {
-			Enrolment x = controlenrolment.getEnrolment(i);
-			if (x.getCourseID() == course_id && x.getStudentID() == this->student.getID()) {
-				controlenrolment.removeEnrolment(x.getID() - 1);
-				c++;
-				cout << "Ai renuntat la acest curs!" << endl;
-				return 0;
-			}
-		}
-		cout << "Nu esti inscris la acest curs!" << endl;
-		return 0;
-	}
-
 	void menu() {
 		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 		cout << "Introduceti :" << endl;
-		cout << "- 1 pentru a va deloga" << endl;
-		cout << "- 2 pentru a vedea toate cursurile disponibile" << endl;
-		cout << "- 3 pentru a afisa cursurile la care sunteti inscris" << endl;
-		cout << "- 4 pentru a va inscrie la un curs" << endl;
-		cout << "- 5 pentru a renunta la un curs" << endl;
+		cout << "- 1 pentru a vedea toate cursurile disponibile" << endl;
+		cout << "- 2 pentru a va inscrie la un curs" << endl;
+		cout << "- 3 pentru a renunta la un curs" << endl;
+		cout << "- 4 pentru a afisa cursurile la care sunteti inscris" << endl;
+		cout << "- 5 pentru a vedea frecventa de elevi inscrisi la cursuri" << endl;
+		cout << "- 6 pentru a sorta dupa numarul de participanti" << endl;
+	}
+
+	void addEnrollCourse() {
+		string numeCurs;
+		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+		cout << "Introduceti numele cursului la care doriti sa va inscrieti :" << endl;
+		cin >> numeCurs;
+		int idCurs = controlcourse.findByName(numeCurs).getID();
+
+		if (idCurs == -1) {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Acest curs nu exista!" << endl;
+		}else if (!controlenrolment.existaDeja(student.getID(), idCurs)) {
+			Enrolment x(controlenrolment.idUnic(), idCurs, student.getID());
+			controlenrolment.addEnrolment(x);
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Ati fost inscris la " << numeCurs << "!" << endl;
+		}else {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Sunteti deja inscris la acest curs!" << endl;
+		}
+	}
+
+	void afisareCursuriEnrolled() {
+		int cursuri[100];
+		int n;
+		controlenrolment.cursuriEnrolled(cursuri, n, student.getID());
+		controlcourse.afisareCursuriVector(cursuri, n);
+	}
+
+	void afisareFrecventaCursuri() {
+		int frecventa[100]{};
+		int n = controlcourse.getDim() - 1;
+		controlenrolment.frecventaCursuri(frecventa, n);
+		controlcourse.afisareCuFrecventa(frecventa, n);
+	}
+
+	void sortareDupaParticipanti() {
+		int frecventa[100]{};
+		int n = controlcourse.getDim() - 1;
+		controlenrolment.frecventaCursuri(frecventa, n);
+		controlcourse.sortareFrecventa(frecventa, n);
+		controlcourse.afisareCuFrecventa(frecventa, n);
+	}
+
+public:
+
+	View() {
+		student.setID(11);
+		student.setFirstName("Gabi");
+		student.setLastName("Georgescu");
+		student.setEmail("gabigeo@gmail.com");
+		student.setPassword("Parola12");
+		student.setAge(17);
+		play();
 	}
 
 	void play() {
-		bool logged = false;
 		bool running = true;
 		int p;
-		int course_id;
 
 		while (running) {
-			if (!logged) {
-				login(logged, this->student);
-			}
-			else {
-				menu();
-				cin >> p;
-
-				switch (p)
-				{
-				case 1:
-					logout(logged);
-					break;
-				case 2:
-					afisareCourse();
-					break;
-				case 3:
-					afisareCoursesEnroled();
-					break;
-				case 4:
-					adaugareCourseStudent(course_id);
-					break;
-				case 5:
-					stergereCourseStudent(course_id);
-					break;
-				default:
-					break;
-				}
+			menu();
+			string al;
+			cin >> al;
+			p = stoi(al);
+			switch (p)
+			{
+			case 1:
+				controlcourse.afisareCursuri();
+				break;
+			case 2:
+				addEnrollCourse();
+				break;
+			case 4:
+				afisareCursuriEnrolled();
+				break;
+			case 5:
+				afisareFrecventaCursuri();
+				break;
+			case 6:
+				sortareDupaParticipanti();
+				break;
+			default:
+				break;
 			}
 		}
 	}
 
-public :
 
-	View() {
-		this->play();
-	}
-
-	void afisareCourse() {
-		for (int i = 0; i < controlcourse.getDim(); i++) {
-			Course course = controlcourse.getCourse(i);
-			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-			course.descriereCourse();
-		}
-	}
-
-	//void afisareEnrolment() {
-	//	for (int i = 0; i < controlenrolment.getDim(); i++) {
-	//		Enrolment enrolment = controlenrolment.getEnrolment(i);
-	//		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-	//		enrolment.descriereEnrolment();
-	//	}
-	//}
 
 };

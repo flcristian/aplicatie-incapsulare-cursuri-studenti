@@ -136,6 +136,7 @@
     <ClInclude Include="course.h" />
     <ClInclude Include="enrolment.h" />
     <ClInclude Include="student.h" />
+    <ClInclude Include="cristi.h" />
     <ClInclude Include="view.h" />
   </ItemGroup>
   <ItemGroup>

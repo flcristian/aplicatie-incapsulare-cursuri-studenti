@@ -2,9 +2,9 @@
 
 struct Course {
 private:
-	int id;
-	string name;
-	string department;
+	int id=-1;
+	string name="";
+	string department="";
 
 public:
 

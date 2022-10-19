@@ -39,17 +39,44 @@ public:
 		return this->dim;
 	}
 
-	void addEnrolment(int student_id, int course_id) {
-		Enrolment x(this->dim, course_id, student_id);
-		this->enrolments[dim] = x;
-		this->dim++;
+	int idUnic() {
+		if (dim == 0) {
+
+			return 1;
+		}
+		else {
+			return dim + 1;
+		}
 	}
 
-	void removeEnrolment(int id){
-		for (int i = id; i < this->dim - 1; i++) {
-			this->enrolments[i] = this->enrolments[i + 1];
-			this->enrolments[i].setID(this->enrolments[i].getID() - 1);
+	bool existaDeja(int student_id, int course_id) {
+		for (int i = 0; i < dim; i++) {
+			if (student_id == enrolments[i].getStudentID() && course_id == enrolments[i].getCourseID()) {
+				return true;
+			}
 		}
-		this->dim--;
+		return false;
+	}
+
+	void addEnrolment(Enrolment x) {
+		enrolments[dim] = x;
+		dim++;
+	}
+
+	void frecventaCursuri(int frecventa[], int n) {
+		for (int i = 0; i < dim; i++) {
+			frecventa[enrolments[i].getCourseID() - 1]++;
+		}
+
+	}
+
+	void cursuriEnrolled(int cursuri[], int& n, int student_id) {
+		n = 0;
+		for (int i = 0; i < dim; i++) {
+			if (enrolments[i].getStudentID() == student_id) {
+				cursuri[n] = enrolments[i].getCourseID();
+				n++;
+			}
+		}
 	}
 };

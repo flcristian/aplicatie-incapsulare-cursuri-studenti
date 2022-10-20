@@ -49,18 +49,25 @@ public:
 		}
 	}
 
-	bool existaDeja(int student_id, int course_id) {
+	int esteInscris(int student_id, int course_id) {
 		for (int i = 0; i < dim; i++) {
 			if (student_id == enrolments[i].getStudentID() && course_id == enrolments[i].getCourseID()) {
-				return true;
+				return enrolments[i].getID();
 			}
 		}
-		return false;
+		return -1;
 	}
 
 	void addEnrolment(Enrolment x) {
 		enrolments[dim] = x;
 		dim++;
+	}
+
+	void removeEnrolment(int idEnrolment) {
+		for (int i = idEnrolment - 1; i < dim; i++) {
+			enrolments[i] = enrolments[i + 1];
+		}
+		dim--;
 	}
 
 	void frecventaCursuri(int frecventa[], int n) {

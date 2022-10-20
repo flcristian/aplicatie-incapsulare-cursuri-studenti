@@ -19,7 +19,7 @@ private:
 		cout << "- 6 pentru a sorta dupa numarul de participanti" << endl;
 	}
 
-	void addEnrollCourse() {
+	void enrollCourse() {
 		string numeCurs;
 		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 		cout << "Introduceti numele cursului la care doriti sa va inscrieti :" << endl;
@@ -29,14 +29,41 @@ private:
 		if (idCurs == -1) {
 			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 			cout << "Acest curs nu exista!" << endl;
-		}else if (!controlenrolment.existaDeja(student.getID(), idCurs)) {
+		}
+		else if (controlenrolment.esteInscris(student.getID(), idCurs) == -1) {
 			Enrolment x(controlenrolment.idUnic(), idCurs, student.getID());
 			controlenrolment.addEnrolment(x);
 			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 			cout << "Ati fost inscris la " << numeCurs << "!" << endl;
-		}else {
+		}
+		else {
 			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 			cout << "Sunteti deja inscris la acest curs!" << endl;
+		}
+	}
+
+	void removeEnrolment() {
+		string numeCurs;
+		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+		cout << "Introduceti numele cursului la care doriti sa renuntati :" << endl;
+		cin >> numeCurs;
+		int idCurs = controlcourse.findByName(numeCurs).getID();
+
+		if (idCurs == -1) {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Acest curs nu exista!" << endl;
+		}
+		else {
+			int idEnrolment = controlenrolment.esteInscris(student.getID(), idCurs);
+			if (idEnrolment != -1) {
+				controlenrolment.removeEnrolment(idEnrolment);
+				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+				cout << "Ati renuntat la " << numeCurs << "!" << endl;
+			}
+			else {
+				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+				cout << "Nu sunteti inscris la acest curs!" << endl;
+			}
 		}
 	}
 
@@ -45,6 +72,10 @@ private:
 		int n;
 		controlenrolment.cursuriEnrolled(cursuri, n, student.getID());
 		controlcourse.afisareCursuriVector(cursuri, n);
+		if (n == 0) {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Nu sunteti inscris la niciun curs!" << endl;
+		}
 	}
 
 	void afisareFrecventaCursuri() {
@@ -89,7 +120,10 @@ public:
 				controlcourse.afisareCursuri();
 				break;
 			case 2:
-				addEnrollCourse();
+				enrollCourse();
+				break;
+			case 3:
+				removeEnrolment();
 				break;
 			case 4:
 				afisareCursuriEnrolled();

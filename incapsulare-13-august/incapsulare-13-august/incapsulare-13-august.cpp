@@ -1,6 +1,7 @@
-#include "view.h"
+#include "view-login.h"
 
 int main()
 {
-    View view;
+    ViewLogin view;
+    view.play();
 }

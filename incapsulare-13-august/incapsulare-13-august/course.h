@@ -1,20 +1,22 @@
-#include "student.h"
+#include "profesor.h"
 
 struct Course {
 private:
-	int id=-1;
-	string name="";
-	string department="";
+	int id = -1;
+	string name = "";
+	string department = "";
+	int idProfesor = -1;
 
 public:
 
 	Course() {
 	}
 
-	Course(int id, string name, string department) {
+	Course(int id, string name, string department, int idProfesor) {
 		this->id = id;
 		this->name = name;
 		this->department = department;
+		this->idProfesor = idProfesor;
 	}
 
 	int getID() {
@@ -29,6 +31,10 @@ public:
 		return this->department;
 	}
 
+	int getProfesorID() {
+		return this->idProfesor;
+	}
+
 	void setID(int id) {
 		this->id = id;
 	}
@@ -39,6 +45,10 @@ public:
 
 	void setDepartment(string department) {
 		this->department = department;
+	}
+
+	void setIdProfesor(int idProfesor) {
+		this->idProfesor = idProfesor;
 	}
 
 	void descriereCourse() {

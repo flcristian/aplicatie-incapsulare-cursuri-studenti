@@ -132,16 +132,20 @@
   <ItemGroup>
     <ClInclude Include="controller-course.h" />
     <ClInclude Include="controller-enrolment.h" />
+    <ClInclude Include="controller-professors.h" />
     <ClInclude Include="controller-student.h" />
     <ClInclude Include="course.h" />
     <ClInclude Include="enrolment.h" />
+    <ClInclude Include="profesor.h" />
     <ClInclude Include="student.h" />
-    <ClInclude Include="cristi.h" />
-    <ClInclude Include="view.h" />
+    <ClInclude Include="view-login.h" />
+    <ClInclude Include="view-profesori.h" />
+    <ClInclude Include="view-student.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="courses.txt" />
     <Text Include="enrolments.txt" />
+    <Text Include="professors.txt" />
     <Text Include="students.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

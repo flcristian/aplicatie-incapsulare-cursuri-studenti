@@ -55,4 +55,26 @@ public :
 		}
 	}
 
+	void afisareStudentiVector(int studenti[], int n) {
+		for (int i = 0; i < n; i++) {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			students[studenti[i] - 1].descriereStudent();
+		}
+	}
+
+	Student isStudent(string email, string parola) {
+		for (int i = 0; i < dim; i++) {
+			if (students[i].getEmail() == email && students[i].getPassword() == parola) {
+				return students[i];
+			}
+		}
+		return Student();
+	}
+
+	void addStudent(Student student) {
+		students[student.getID()].descriereStudent();
+		students[student.getID()] = student;
+		dim++;
+	}
+
 };

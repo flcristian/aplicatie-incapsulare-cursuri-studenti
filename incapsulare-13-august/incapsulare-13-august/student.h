@@ -6,12 +6,12 @@ using namespace std;
 
 struct Student {
 private :
-	int id=-1;
-	string first_name="";
-	string last_name="";
-	string email="";
-	string password="";
-	int age=-1;
+	int id = -1;
+	string first_name = "";
+	string last_name = "";
+	string email = "";
+	string password = "";
+	int age = -1;
 
 public:
 

@@ -70,6 +70,16 @@ public:
 		dim--;
 	}
 
+	void studentiEnrolled(int studenti[], int idCurs, int& n) {
+		n = 0;
+		for (int i = 0; i < dim; i++) {
+			if (enrolments[i].getCourseID() == idCurs) {
+				studenti[n] = enrolments[i].getStudentID();
+				n++;
+			}
+		}
+	}
+
 	void frecventaCursuri(int frecventa[], int n) {
 		for (int i = 0; i < dim; i++) {
 			frecventa[enrolments[i].getCourseID() - 1]++;

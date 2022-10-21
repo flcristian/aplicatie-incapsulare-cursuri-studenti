@@ -13,12 +13,14 @@ private:
 			int id;
 			string name;
 			string department;
+			int idProfesor;
 
 			f >> id;
 			f >> name;
 			f >> department;
+			f >> idProfesor;
 
-			Course x(id, name, department);
+			Course x(id, name, department, idProfesor);
 			courses[dim] = x;
 			dim++;
 		}
@@ -70,6 +72,16 @@ public:
 			}
 		}
 		return Course();
+	}
+
+	void cursuriProfesor(int cursuri[], int idProfesor, int& n) {
+		n = 0;
+		for (int i = 0; i < dim; i++) {
+			if (courses[i].getProfesorID() == idProfesor) {
+				cursuri[n] = courses[i].getID();
+				n++;
+			}
+		}
 	}
 
 	void sortareFrecventa(int frecventa[], int n) {

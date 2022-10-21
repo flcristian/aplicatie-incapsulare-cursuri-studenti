@@ -26,9 +26,6 @@
     <ClInclude Include="controller-student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cristi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="course.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -41,7 +38,19 @@
     <ClInclude Include="controller-enrolment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="view.h">
+    <ClInclude Include="view-student.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view-login.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="profesor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controller-professors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view-profesori.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,6 +62,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="enrolments.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="professors.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

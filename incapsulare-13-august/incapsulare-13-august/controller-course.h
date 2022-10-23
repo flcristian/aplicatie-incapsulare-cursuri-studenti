@@ -121,4 +121,13 @@ public:
 		}
 		dim--;
 	}
+
+	/*void updateCourse() {
+		ofstream f("courses.txt");
+		for (int i = 0; i < dim; i++) {
+			Course x = courses[i];
+			f << x.getID() << " " << x.getName() << " " << x.getDepartment() << " " << x.getProfesorID() << endl;
+ 		}
+		f.close();
+	}*/
 };

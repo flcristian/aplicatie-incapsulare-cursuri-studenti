@@ -45,14 +45,14 @@ public:
 			return 1;
 		}
 		else {
-			return enrolments[dim].getID() + 1;
+			return (enrolments[dim].getID() + 1);
 		}
 	}
 
 	int esteInscris(int student_id, int course_id) {
 		for (int i = 0; i < dim; i++) {
 			if (student_id == enrolments[i].getStudentID() && course_id == enrolments[i].getCourseID()) {
-				return enrolments[i].getID();
+				return i;
 			}
 		}
 		return -1;
@@ -63,9 +63,19 @@ public:
 		dim++;
 	}
 
-	void removeEnrolment(int idEnrolment) {
-		for (int i = idEnrolment - 1; i < dim; i++) {
+	void removeEnrolment(int id) {
+		for (int i = id; i < dim; i++) {
 			enrolments[i] = enrolments[i + 1];
+		}
+		dim--;
+	}
+
+	void removeCurs(int idCurs) {
+		for (int i = 0; i < dim; i++) {
+			if (enrolments[i].getCourseID() == idCurs) {
+				removeEnrolment(i);
+				i--;
+			}
 		}
 	}
 
@@ -96,4 +106,12 @@ public:
 			}
 		}
 	}
+
+	/*void updateEnrolments() {
+		ofstream f("enrolments.txt");
+		for (int i = 0; i < dim; i++) {
+			f << enrolments[i].getID() << " " << enrolments[i].getCourseID() << " " << enrolments[i].getStudentID() << endl;
+		}
+		f.close();
+	}*/
 };

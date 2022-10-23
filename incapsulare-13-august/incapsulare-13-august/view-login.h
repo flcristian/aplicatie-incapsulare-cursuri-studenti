@@ -62,6 +62,7 @@ private:
 
 		Student student(id, prenume, nume, email, parola, varsta);
 		controlstudent.addStudent(student);
+		/*controlstudent.updateStudents();*/
 		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 		cout << "V-ati inregistrat cu succes!" << endl;
 	}

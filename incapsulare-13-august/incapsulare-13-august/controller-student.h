@@ -79,9 +79,25 @@ public :
 		return Student();
 	}
 
+	/*void updateStudents() {
+		ofstream f("students.txt");
+		for (int i = 0; i < dim; i++) {
+			Student x = students[i];
+			f << x.getID() << " " << x.getFirstName() << " " << x.getLastName() << " " << x.getEmail() << " " << x.getPassword() << " " << x.getAge() << endl;
+		}
+		f.close();
+	}*/
+
 	void addStudent(Student student) {
 		students[dim] = student;
 		dim++;
+	}
+
+	void removeStudent(int id) {
+		for (int i = id; i < dim - 1; i++) {
+			students[i] = students[i + 1];
+		}
+		dim--;
 	}
 
 };

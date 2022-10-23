@@ -17,6 +17,8 @@ private:
 		cout << "- 4 pentru a inchide un curs" << endl;
 		cout << "- 5 pentru a adauga un student la un curs" << endl;
 		cout << "- 6 pentru a da afara un student de la un curs" << endl;
+		cout << "- 7 pentru a inregistra un student" << endl;
+		cout << "- 8 pentru a sterge un student" << endl;
 	}
 
 	void logout(bool& running) {
@@ -77,6 +79,7 @@ private:
 		int id = controlcourse.idUnic();
 		Course x(id, numeCurs, departament, idProfesor);
 		controlcourse.addCourse(x);
+		/*controlcourse.updateCourse();*/
 		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 		cout << "Cursul a fost creat cu succes!" << endl;
 	}
@@ -91,7 +94,10 @@ private:
 			Course curs = controlcourse.getCourse(i);
 			int idCurs = curs.getID();
 			if (curs.getProfesorID() == profesor.getID()) {
+				controlenrolment.removeCurs(idCurs);
+				/*controlenrolment.updateEnrolments();*/
 				controlcourse.removeCourse(i);
+				/*controlcourse.updateCourse();*/
 				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 				cout << "Cursul a fost inchis cu succes!" << endl;
 			}
@@ -106,7 +112,7 @@ private:
 		}
 	}
 
-	void inscrieStudent() {
+	void inscrieStudentCurs() {
 		string prenume, nume, numeCurs;
 		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 		cout << "Introduceti prenumele studentului :" << endl;
@@ -124,9 +130,11 @@ private:
 				int idStudent = student.getID();
 				int idCurs = curs.getID();
 				int idEnrolment = controlenrolment.idUnic();
+				cout << idEnrolment << endl;
 				if (controlenrolment.esteInscris(idStudent, idCurs) == -1) {
 					Enrolment x(idEnrolment, idCurs, idStudent);
 					controlenrolment.addEnrolment(x);
+					/*controlenrolment.updateEnrolments();*/
 					cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 					cout << "Ati inscris acest student cu succes la " << curs.getName() << "!" << endl;
 				}
@@ -145,6 +153,81 @@ private:
 		else {
 			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 			cout << "Acest student sau curs nu exista!" << endl;
+		}
+	}
+
+	void removeStudentCurs() {
+		string prenume, nume;
+		string numeCurs;
+		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+		cout << "Introduceti prenumele studentului :" << endl;
+		cin >> prenume;
+		cout << "Introduceti numele studentului :" << endl;
+		cin >> nume;
+		cout << "Introduceti numele cursului :" << endl;
+		cin >> numeCurs;
+		int iStudent = controlstudent.findByName(nume, prenume);
+		int iCurs = controlcourse.findByName(numeCurs);
+		if (iStudent != -1 && iCurs != -1) {
+			Student student = controlstudent.getStudent(iStudent);
+			Course curs = controlcourse.getCourse(iCurs);
+			int iEnrolment = controlenrolment.esteInscris(student.getID(), curs.getID());
+			if (iEnrolment != -1) {
+				controlenrolment.removeEnrolment(iEnrolment);
+				/*controlenrolment.updateEnrolments();*/
+				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+				cout << "L-ati scos pe " << student.getFirstName() << " " << student.getLastName() << " de la " << curs.getName() << "." << endl;
+			}
+			else {
+				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+				cout << student.getFirstName() << " " << student.getLastName() << " nu este inscris la " << curs.getName() << "." << endl;
+			}
+		}
+		else {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Studentul sau cursul nu exista." << endl;
+		}
+	}
+
+	void inregistrare() {
+		string prenume, nume, email, parola;
+		int varsta;
+		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+		cout << "Introduceti prenumele : ";
+		cin >> prenume;
+		cout << "Introduceti numele de familie : ";
+		cin >> nume;
+		cout << "Introduceti varsta : ";
+		cin >> varsta;
+		cout << "Introduceti email-ul : ";
+		cin >> email;
+		cout << "Introduceti parola : ";
+		cin >> parola;
+		int id = controlstudent.idUnic();
+
+		Student student(id, prenume, nume, email, parola, varsta);
+		controlstudent.addStudent(student);
+		/*controlstudent.updateStudents();*/
+		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+		cout << "Ati inregistrat studentul cu succes!" << endl;
+	}
+
+	void unregister() {
+		string prenume, nume;
+		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+		cout << "Introduceti prenumele studentului :" << endl;
+		cin >> prenume;
+		cout << "Introduceti numele studentului :" << endl;
+		cin >> nume;
+		int i = controlstudent.findByName(nume, prenume);
+		if (i != -1) {
+			controlstudent.removeStudent(i);
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Ati sters cu succes studentul!" << endl;
+		}
+		else {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Studentul nu exista." << endl;
 		}
 	}
 
@@ -169,10 +252,13 @@ public:
 
 			switch (p)
 			{
+			case -1:
+				running = false;
+				break;
 			case 1:
 				afisareCursuriProfesor();
 				break;
-			case 2:
+			case 2: 
 				afisareStudentiCurs();
 				break;
 			case 3:
@@ -182,10 +268,16 @@ public:
 				inchidereCurs();
 				break;
 			case 5:
-				inscrieStudent();
+				inscrieStudentCurs();
 				break;
 			case 6:
-				controlcourse.afisareCursuri();
+				removeStudentCurs();
+				break;
+			case 7:
+				inregistrare();
+				break;
+			case 8:
+				unregister();
 				break;
 			default:
 				break;

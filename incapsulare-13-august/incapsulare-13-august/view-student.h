@@ -25,22 +25,26 @@ private:
 		cout << "Introduceti numele cursului la care doriti sa va inscrieti :" << endl;
 		cin >> numeCurs;
 		int i = controlcourse.findByName(numeCurs);
-		Course curs = controlcourse.getCourse(i);
-		int idCurs = curs.getID();
 
-		if (idCurs == -1) {
+		if (i == -1) {
 			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 			cout << "Acest curs nu exista!" << endl;
 		}
-		else if (controlenrolment.esteInscris(student.getID(), idCurs) == -1) {
-			Enrolment x(controlenrolment.idUnic(), idCurs, student.getID());
-			controlenrolment.addEnrolment(x);
-			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-			cout << "Ati fost inscris la " << numeCurs << "!" << endl;
-		}
 		else {
-			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
-			cout << "Sunteti deja inscris la acest curs!" << endl;
+			Course curs = controlcourse.getCourse(i);
+			int idCurs = curs.getID();
+			if (controlenrolment.esteInscris(student.getID(), idCurs) == -1) {
+				int idEnrolment = controlenrolment.idUnic();
+				Enrolment x(idEnrolment, idCurs, student.getID());
+				controlenrolment.addEnrolment(x);
+				/*controlenrolment.updateEnrolments();*/
+				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+				cout << "Ati fost inscris la " << numeCurs << "!" << endl;
+			}
+			else {
+				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+				cout << "Sunteti deja inscris la acest curs!" << endl;
+			}
 		}
 	}
 
@@ -61,6 +65,7 @@ private:
 			int idEnrolment = controlenrolment.esteInscris(student.getID(), idCurs);
 			if (idEnrolment != -1) {
 				controlenrolment.removeEnrolment(idEnrolment);
+				/*controlenrolment.updateEnrolments();*/
 				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 				cout << "Ati renuntat la " << numeCurs << "!" << endl;
 			}

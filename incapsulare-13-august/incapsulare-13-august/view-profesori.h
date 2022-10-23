@@ -19,6 +19,7 @@ private:
 		cout << "- 6 pentru a da afara un student de la un curs" << endl;
 		cout << "- 7 pentru a inregistra un student" << endl;
 		cout << "- 8 pentru a sterge un student" << endl;
+		cout << "- 9 pentru a va deloga" << endl;
 	}
 
 	void logout(bool& running) {
@@ -278,6 +279,9 @@ public:
 				break;
 			case 8:
 				unregister();
+				break;
+			case 9:
+				logout(running);
 				break;
 			default:
 				break;

@@ -53,6 +53,12 @@
     <ClInclude Include="view-profesori.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="book.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controller-book.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="students.txt">
@@ -65,6 +71,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="professors.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="books.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

@@ -6,7 +6,7 @@ private:
 	string name = "";
 	string department = "";
 	int idProfesor = -1;
-
+	
 public:
 
 	Course() {

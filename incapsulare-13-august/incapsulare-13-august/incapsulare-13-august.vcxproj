@@ -130,6 +130,8 @@
     <ClCompile Include="incapsulare-13-august.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="book.h" />
+    <ClInclude Include="controller-book.h" />
     <ClInclude Include="controller-course.h" />
     <ClInclude Include="controller-enrolment.h" />
     <ClInclude Include="controller-professors.h" />
@@ -143,6 +145,7 @@
     <ClInclude Include="view-student.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="books.txt" />
     <Text Include="courses.txt" />
     <Text Include="enrolments.txt" />
     <Text Include="professors.txt" />

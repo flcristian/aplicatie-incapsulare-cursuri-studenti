@@ -1,9 +1,10 @@
-#include "controller-professors.h"
+#include "controller-book.h"
 
 struct View {
 private:
 	ControlEnrolment controlenrolment;
 	ControlCourse controlcourse;
+	ControlBook controlbook;
 	Student student;
 	
 	void menu() {
@@ -145,6 +146,9 @@ public:
 				break;
 			case 7:
 				logout(running);
+				break;
+			case 8:
+				controlbook.afisareBooks();
 				break;
 			default:
 				break;

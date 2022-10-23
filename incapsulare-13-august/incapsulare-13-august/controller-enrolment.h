@@ -45,7 +45,7 @@ public:
 			return 1;
 		}
 		else {
-			return dim + 1;
+			return enrolments[dim].getID() + 1;
 		}
 	}
 
@@ -67,9 +67,9 @@ public:
 		for (int i = idEnrolment - 1; i < dim; i++) {
 			enrolments[i] = enrolments[i + 1];
 		}
-		dim--;
 	}
 
+	// SE FOLOSESTE DE ID-UL SETAT AL CURSULUI, INCEPAND DE LA 1
 	void studentiEnrolled(int studenti[], int idCurs, int& n) {
 		n = 0;
 		for (int i = 0; i < dim; i++) {

@@ -10,6 +10,7 @@ private:
 		cout << "Introduceti :" << endl;
 		cout << "- 1 pentru a va loga" << endl;
 		cout << "- 2 pentru a va inregistra" << endl;
+		cout << "- 3 pentru a iesi" << endl;
 	}
 
 	void login() {
@@ -68,7 +69,6 @@ private:
 public:
 
 	ViewLogin() { 
-		play();
 	}
 
 	void play() {
@@ -91,6 +91,9 @@ public:
 				inregistrare();
 				break;
 			case 3:
+				running = false;
+				break;
+			case 4:
 				setGabi();
 				break;
 			default:

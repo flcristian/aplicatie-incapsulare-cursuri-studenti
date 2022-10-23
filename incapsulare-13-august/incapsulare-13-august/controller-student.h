@@ -51,7 +51,15 @@ public :
 			return 1;
 		}
 		else {
-			return dim;
+			return students[dim].getID() + 1;
+		}
+	}
+
+	int findByName(string nume, string prenume) {
+		for (int i = 0; i < dim; i++) {
+			if (prenume == students[i].getFirstName() && nume == students[i].getLastName()) {
+				return i;
+			}
 		}
 	}
 
@@ -72,8 +80,7 @@ public :
 	}
 
 	void addStudent(Student student) {
-		students[student.getID()].descriereStudent();
-		students[student.getID()] = student;
+		students[dim] = student;
 		dim++;
 	}
 

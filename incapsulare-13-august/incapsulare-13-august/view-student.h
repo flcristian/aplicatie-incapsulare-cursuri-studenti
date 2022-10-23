@@ -24,7 +24,9 @@ private:
 		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 		cout << "Introduceti numele cursului la care doriti sa va inscrieti :" << endl;
 		cin >> numeCurs;
-		int idCurs = controlcourse.findByName(numeCurs).getID();
+		int i = controlcourse.findByName(numeCurs);
+		Course curs = controlcourse.getCourse(i);
+		int idCurs = curs.getID();
 
 		if (idCurs == -1) {
 			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
@@ -47,13 +49,15 @@ private:
 		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 		cout << "Introduceti numele cursului la care doriti sa renuntati :" << endl;
 		cin >> numeCurs;
-		int idCurs = controlcourse.findByName(numeCurs).getID();
+		int i = controlcourse.findByName(numeCurs);
 
-		if (idCurs == -1) {
+		if (i == -1) {
 			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 			cout << "Acest curs nu exista!" << endl;
 		}
 		else {
+			Course curs = controlcourse.getCourse(i);
+			int idCurs = curs.getID();
 			int idEnrolment = controlenrolment.esteInscris(student.getID(), idCurs);
 			if (idEnrolment != -1) {
 				controlenrolment.removeEnrolment(idEnrolment);

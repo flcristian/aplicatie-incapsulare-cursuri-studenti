@@ -61,24 +61,24 @@ public:
 			return 1;
 		}
 		else {
-			return dim;
+			return courses[dim].getID() + 1;
 		}
 	}
 
-	Course findByName(string numeCurs) {
+	int findByName(string numeCurs) {
 		for (int i = 0; i < dim; i++) {
 			if (courses[i].getName() == numeCurs) {
-				return courses[i];
+				return i;
 			}
 		}
-		return Course();
+		return -1;
 	}
 
 	void cursuriProfesor(int cursuri[], int idProfesor, int& n) {
 		n = 0;
 		for (int i = 0; i < dim; i++) {
 			if (courses[i].getProfesorID() == idProfesor) {
-				cursuri[n] = courses[i].getID();
+				cursuri[n] = courses[i].getID() - 1 ;
 				n++;
 			}
 		}
@@ -108,5 +108,17 @@ public:
 			courses[i].descriereCourse();
 			cout << "Numarul de participanti : " << frecventa[i] << endl;
 		}
+	}
+
+	void addCourse(Course curs) {
+		courses[dim] = curs;
+		dim++;
+	}
+
+	void removeCourse(int id) {
+		for (int i = id; i < dim - 1; i++) {
+			courses[i] = courses[i + 1];
+		}
+		dim--;
 	}
 };

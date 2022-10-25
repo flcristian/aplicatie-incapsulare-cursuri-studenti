@@ -59,6 +59,12 @@
     <ClInclude Include="controller-book.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="rent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controller-rents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="students.txt">
@@ -74,6 +80,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="books.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="rents.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

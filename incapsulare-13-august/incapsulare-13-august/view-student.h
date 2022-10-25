@@ -1,9 +1,10 @@
-#include "controller-book.h"
+#include "controller-professors.h"
 
 struct View {
 private:
 	ControlEnrolment controlenrolment;
 	ControlCourse controlcourse;
+	ControlRent controlrent;
 	ControlBook controlbook;
 	Student student;
 	
@@ -17,7 +18,7 @@ private:
 		cout << "- 4 pentru a afisa cursurile la care sunteti inscris" << endl;
 		cout << "- 5 pentru a vedea frecventa de elevi inscrisi la cursuri" << endl;
 		cout << "- 6 pentru a sorta dupa numarul de participanti" << endl;
-		cout << "- 7 pentru a va deloga" << endl;
+		cout << "- 7 pentru a afisa lista de carti pe care le puteti imprumuta" << endl;
 	}
 
 	void enrollCourse() {
@@ -95,6 +96,25 @@ private:
 		controlcourse.afisareCuFrecventa(frecventa, n);
 	}
 
+	void afisareCartiStock() {
+		Book x[100];
+		int n = 0;
+		for (int i = 0; i < controlbook.getDim(); i++) {
+			Book book = controlbook.getBook(i);
+			if (controlrent.stillInStock(book.getID(), book.getCount())) {
+				x[n] = book;
+				n++;
+			}
+		}
+		if (n == 0) {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Nu exista carti in stock." << endl;
+		}
+		else {
+			controlbook.afisareBooksVector(x, n);
+		}
+	}
+
 	void sortareDupaParticipanti() {
 		int frecventa[100]{};
 		int n = controlcourse.getDim() - 1;
@@ -145,10 +165,9 @@ public:
 				sortareDupaParticipanti();
 				break;
 			case 7:
-				logout(running);
+				afisareCartiStock();
 				break;
 			case 8:
-				controlbook.afisareBooks();
 				break;
 			default:
 				break;

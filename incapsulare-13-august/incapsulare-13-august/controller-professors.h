@@ -49,7 +49,7 @@ public:
 			return 1;
 		}
 		else {
-			return dim;
+			return profesori[dim - 1].getID() + 1;
 		}
 	}
 

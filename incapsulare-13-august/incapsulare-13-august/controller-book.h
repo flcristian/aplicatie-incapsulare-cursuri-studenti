@@ -1,4 +1,4 @@
-#include "controller-professors.h"
+#include "controller-student.h"
 
 struct ControlBook {
 private:
@@ -34,10 +34,34 @@ public:
 		citire();
 	}
 
+	int idUnic() {
+		if (dim == 0) {
+			return 1;
+		}
+		else {
+			return books[dim - 1].getID() + 1;
+		}
+	}
+
+	Book getBook(int i) {
+		return this->books[i];
+	}
+
+	int getDim() {
+		return this->dim;
+	}
+
 	void afisareBooks() {
 		for (int i = 0; i < dim; i++) {
 			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 			books[i].descriereBook();
+		}
+	}
+
+	void afisareBooksVector(Book x[], int n) {
+		for (int i = 0; i < n; i++) {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			x[i].descriereBook();
 		}
 	}
 };

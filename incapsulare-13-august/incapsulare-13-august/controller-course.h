@@ -1,4 +1,4 @@
-#include "controller-student.h"
+#include "controller-book.h"
 
 struct ControlCourse {
 private:
@@ -61,7 +61,7 @@ public:
 			return 1;
 		}
 		else {
-			return courses[dim].getID() + 1;
+			return courses[dim - 1].getID() + 1;
 		}
 	}
 
@@ -122,12 +122,12 @@ public:
 		dim--;
 	}
 
-	/*void updateCourse() {
+	void updateCourse() {
 		ofstream f("courses.txt");
 		for (int i = 0; i < dim; i++) {
 			Course x = courses[i];
 			f << x.getID() << " " << x.getName() << " " << x.getDepartment() << " " << x.getProfesorID() << endl;
  		}
 		f.close();
-	}*/
+	}
 };

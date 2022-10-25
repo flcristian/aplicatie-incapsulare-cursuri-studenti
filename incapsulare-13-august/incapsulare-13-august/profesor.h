@@ -1,4 +1,4 @@
-#include "student.h"
+#include "enrolment.h"
 
 struct Profesor {
 private:

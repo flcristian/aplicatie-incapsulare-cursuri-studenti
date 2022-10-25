@@ -131,11 +131,10 @@ private:
 				int idStudent = student.getID();
 				int idCurs = curs.getID();
 				int idEnrolment = controlenrolment.idUnic();
-				cout << idEnrolment << endl;
 				if (controlenrolment.esteInscris(idStudent, idCurs) == -1) {
 					Enrolment x(idEnrolment, idCurs, idStudent);
 					controlenrolment.addEnrolment(x);
-					/*controlenrolment.updateEnrolments();*/
+					controlenrolment.updateEnrolments();
 					cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 					cout << "Ati inscris acest student cu succes la " << curs.getName() << "!" << endl;
 				}
@@ -175,7 +174,7 @@ private:
 			int iEnrolment = controlenrolment.esteInscris(student.getID(), curs.getID());
 			if (iEnrolment != -1) {
 				controlenrolment.removeEnrolment(iEnrolment);
-				/*controlenrolment.updateEnrolments();*/
+				controlenrolment.updateEnrolments();
 				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
 				cout << "L-ati scos pe " << student.getFirstName() << " " << student.getLastName() << " de la " << curs.getName() << "." << endl;
 			}

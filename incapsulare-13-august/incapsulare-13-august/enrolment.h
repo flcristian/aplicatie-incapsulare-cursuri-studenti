@@ -1,4 +1,4 @@
-#include "course.h"
+#include "rent.h"
 
 struct Enrolment {
 private:

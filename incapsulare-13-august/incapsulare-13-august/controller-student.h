@@ -1,4 +1,4 @@
-#include "book.h"
+#include "profesor.h"
 
 struct ControlStudent {
 private :
@@ -51,7 +51,7 @@ public :
 			return 1;
 		}
 		else {
-			return students[dim].getID() + 1;
+			return students[dim - 1].getID() + 1;
 		}
 	}
 

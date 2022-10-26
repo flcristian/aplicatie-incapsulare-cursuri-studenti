@@ -10,13 +10,13 @@ private:
 		dim = 0;
 
 		while (!f.eof()) {
-			int id, book_id, student_id;
+			string id, book_id, student_id;
 
 			f >> id;
 			f >> book_id;
 			f >> student_id;
 
-			Rent x(id, book_id, student_id);
+			Rent x(stoi(id), stoi(book_id), stoi(student_id));
 			rents[dim] = x;
 			dim++;
 		}
@@ -44,6 +44,34 @@ public:
 
 	int getDim() {
 		return this->dim;
+	}
+
+	void addRent(Rent x) {
+		rents[dim] = x;
+		dim++;
+	}
+
+	void afisareRents() {
+		for (int i = 0; i < dim; i++) {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			rents[i].descriereRent();
+		}
+	}
+
+	void removeRent(int id) {
+		for (int i = id; i < dim - 1; i++) {
+			rents[i] = rents[i + 1];
+		}
+		dim--;
+	}
+
+	int inchiriataDeja(int book_id, int student_id) {
+		for (int i = 0; i < dim; i++) {
+			if (rents[i].getBookID() == book_id && rents[i].getStudentID() == student_id) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	bool stillInStock(int book_id, int total_count) {

@@ -18,7 +18,10 @@ private:
 		cout << "- 4 pentru a afisa cursurile la care sunteti inscris" << endl;
 		cout << "- 5 pentru a vedea frecventa de elevi inscrisi la cursuri" << endl;
 		cout << "- 6 pentru a sorta dupa numarul de participanti" << endl;
-		cout << "- 7 pentru a afisa lista de carti pe care le puteti imprumuta" << endl;
+		cout << "- 7 pentru a afisa lista de carti pe care sunt in stock" << endl;
+		cout << "- 8 pentru a inchiria o carte" << endl;
+		cout << "- 9 pentru a returna o carte" << endl;
+		cout << "- 10 pentru a va deloga" << endl;
 	}
 
 	void enrollCourse() {
@@ -115,6 +118,63 @@ private:
 		}
 	}
 
+	void rentBook() {
+		string bookName;
+		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+		cout << "Introduceti numele cartii (fara spatii) :" << endl;
+		cin >> bookName;
+		int i = controlbook.findByName(bookName);
+		if (i != -1) {
+			Book x = controlbook.getBook(i);
+			if (controlrent.stillInStock(x.getID(), x.getCount())) {
+				if (controlrent.inchiriataDeja(x.getID(), student.getID()) == -1) {
+					int id = controlrent.idUnic();
+						Rent rent(id, x.getID(), student.getID());
+						controlrent.addRent(rent);
+						cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+						cout << "Ati inchiriat cu succes aceasta carte!" << endl;
+				}
+				else {
+					cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+					cout << "Nu puteti inchiria aceasi carte de doua ori." << endl;
+				}		
+			}
+			else {
+				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+				cout << "Aceasta carte nu mai este in stock." << endl;
+			}
+		}
+		else {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Aceasta carte nu exista." << endl;
+		}
+	}
+
+	void returnBook() {
+		string bookName;
+		cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+		cout << "Introduceti numele cartii (fara spatii) :" << endl;
+		cin >> bookName;
+		int i = controlbook.findByName(bookName);
+		if (i != -1) {
+			Book x = controlbook.getBook(i);
+			int j = controlrent.inchiriataDeja(x.getID(), student.getID());
+			if (j != -1) {
+				controlrent.removeRent(j);
+				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+				cout << "Ati returnat aceasta carte." << endl;
+			}
+			else {
+				cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+				cout << "Nu ati inchiriat aceasta carte." << endl;
+			}
+		}
+		else {
+			cout << "=-=-=-=-=-=-=-=-=-=-=-=-=-=" << endl;
+			cout << "Aceasta carte nu exista." << endl;
+		}
+	}
+
 	void sortareDupaParticipanti() {
 		int frecventa[100]{};
 		int n = controlcourse.getDim() - 1;
@@ -168,6 +228,13 @@ public:
 				afisareCartiStock();
 				break;
 			case 8:
+				rentBook();
+				break;
+			case 9:
+				returnBook();
+				break;
+			case 10:
+				logout(running);
 				break;
 			default:
 				break;

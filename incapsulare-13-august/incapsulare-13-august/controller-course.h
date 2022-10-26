@@ -10,17 +10,17 @@ private:
 		dim = 0;
 
 		while (!f.eof()) {
-			int id;
+			string id;
 			string name;
 			string department;
-			int idProfesor;
+			string idProfesor;
 
 			f >> id;
 			f >> name;
 			f >> department;
 			f >> idProfesor;
 
-			Course x(id, name, department, idProfesor);
+			Course x(stoi(id), name, department, stoi(idProfesor));
 			courses[dim] = x;
 			dim++;
 		}

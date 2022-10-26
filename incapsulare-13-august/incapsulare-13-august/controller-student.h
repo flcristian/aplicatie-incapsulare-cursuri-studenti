@@ -10,12 +10,12 @@ private :
 		dim = 0;
 
 		while (!f.eof()) {
-			int id;
+			string id;
 			string first_name;
 			string last_name;
 			string email;
 			string password;
-			int age;
+			string age;
 			
 			f >> id;
 			f >> first_name;
@@ -24,7 +24,7 @@ private :
 			f >> password;
 			f >> age;
 
-			Student x(id, first_name, last_name, email, password, age);
+			Student x(stoi(id), first_name, last_name, email, password, stoi(age));
 			students[dim] = x;
 			dim++;
 		}

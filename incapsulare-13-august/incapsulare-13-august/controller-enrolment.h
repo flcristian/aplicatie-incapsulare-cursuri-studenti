@@ -10,15 +10,15 @@ private:
 		dim = 0;
 
 		while (!f.eof()) {
-			int id;
-			int course_id;
-			int student_id;
+			string id;
+			string course_id;
+			string student_id;
 
 			f >> id;
 			f >> course_id;
 			f >> student_id;
 
-			Enrolment x(id, course_id, student_id);
+			Enrolment x(stoi(id), stoi(course_id), stoi(student_id));
 			enrolments[dim] = x;
 			dim++;
 		}

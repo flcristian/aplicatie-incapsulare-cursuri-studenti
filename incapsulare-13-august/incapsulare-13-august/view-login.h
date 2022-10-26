@@ -44,6 +44,12 @@ private:
 		view.play();
 	}
 
+	void setGabiStudent() {
+		Student test = controlstudent.isStudent("geogabi@gmail.com", "Parola12");
+		View view(test);
+		view.play();
+	}
+
 	void inregistrare() {
 		string prenume, nume, email, parola;
 		int varsta;
@@ -96,6 +102,9 @@ public:
 				break;
 			case 4:
 				setGabi();
+				break;
+			case 5:
+				setGabiStudent();
 				break;
 			default:
 				break;

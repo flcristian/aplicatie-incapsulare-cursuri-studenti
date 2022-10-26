@@ -10,7 +10,7 @@ private:
 		dim = 0;
 
 		while (!f.eof()) {
-			int id;
+			string id;
 			string first_name;
 			string last_name;
 			string email;
@@ -22,7 +22,7 @@ private:
 			f >> email;
 			f >> password;
 
-			Profesor x(id, first_name, last_name, email, password);
+			Profesor x(stoi(id), first_name, last_name, email, password);
 			profesori[dim] = x;
 			dim++;
 		}

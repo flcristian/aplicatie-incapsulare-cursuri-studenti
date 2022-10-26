@@ -10,8 +10,8 @@ private:
 		dim = 0;
 		
 		while (!f.eof()) {
-			int id;
-			int count;
+			string id;
+			string count;
 			string author_first_name;
 			string author_last_name;
 			string book_name;
@@ -22,7 +22,7 @@ private:
 			f >> author_last_name;
 			f >> book_name;
 
-			Book x(id, count, author_first_name, author_last_name, book_name);
+			Book x(stoi(id), stoi(count), author_first_name, author_last_name, book_name);
 			books[dim] = x;
 			dim++;
 		}
@@ -49,6 +49,15 @@ public:
 
 	int getDim() {
 		return this->dim;
+	}
+
+	int findByName(string name) {
+		for (int i = 0; i < dim; i++) {
+			if (books[i].getBookName() == name) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	void afisareBooks() {
